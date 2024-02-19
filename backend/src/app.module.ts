@@ -17,7 +17,7 @@ console.log('DATABASE:', config[process.env.NODE_ENV].databaseStorage);
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env' }),
     EmployeesModule,
     SchemaModule,
     WorkPlacesModule,
