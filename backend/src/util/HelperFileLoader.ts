@@ -1,6 +1,8 @@
 import { Request } from 'express';
 import { v4 as uuidV4 } from 'uuid';
 
+import config from 'src/config';
+
 export class HelperFileLoader {
   public customFileName(
     req: Request,
@@ -14,6 +16,6 @@ export class HelperFileLoader {
     file: Express.Multer.File,
     cb: (error: Error, destination: string) => void,
   ) {
-    cb(null, './public');
+    cb(null, config[process.env.NODE_ENV].publicPath);
   }
 }

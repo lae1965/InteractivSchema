@@ -13,6 +13,8 @@ dist
 dist-ssr
 coverage
 *.local
+.env
+*.sqlite3
 
 office_map
 

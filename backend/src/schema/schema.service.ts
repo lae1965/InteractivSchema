@@ -6,6 +6,7 @@ import { join } from 'path';
 import { CreateSchemaDto } from './dto/create-schema.dto';
 import { Schema } from './model';
 import { WorkPlace } from 'src/work-places/model';
+import config from 'src/config';
 
 @Injectable()
 export class SchemaService {
@@ -18,7 +19,9 @@ export class SchemaService {
     try {
       return await this.schemaModel.create(createSchemaDto);
     } catch (e) {
-      unlinkSync(join(process.cwd(), 'public', createSchemaDto.img));
+      unlinkSync(
+        join(config[process.env.NODE_ENV].publicPath, createSchemaDto.img),
+      );
       throw e;
     }
   }
@@ -37,7 +40,7 @@ export class SchemaService {
   async remove(id: number) {
     const img = await this.schemaModel.findByPk(id, { attributes: ['img'] });
     if (!img) return 0;
-    unlinkSync(join(process.cwd(), 'public', img.toJSON().img));
+    unlinkSync(join(config[process.env.NODE_ENV].publicPath, img.toJSON().img));
     return await this.schemaModel.destroy({ where: { id } });
   }
 }

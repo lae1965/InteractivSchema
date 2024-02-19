@@ -1,14 +1,15 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
 
 import { EmployeesModule } from './employees/employees.module';
+
 import { SchemaModule } from './schema/schema.module';
 import { WorkPlacesModule } from './work-places/work-places.module';
 import { Schema } from './schema/model';
 import { WorkPlace } from './work-places/model';
 import { Employee } from './employees/model';
+import config from './config';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { Employee } from './employees/model';
       autoLoadModels: true,
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public'),
+      rootPath: config[process.env.NODE_ENV].publicPath,
     }),
   ],
 })
