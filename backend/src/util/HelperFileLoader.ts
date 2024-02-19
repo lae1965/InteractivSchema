@@ -16,6 +16,6 @@ export class HelperFileLoader {
     file: Express.Multer.File,
     cb: (error: Error, destination: string) => void,
   ) {
-    cb(null, config[process.env.NODE_ENV].publicPath);
+    cb(null, config().publicPath);
   }
 }
