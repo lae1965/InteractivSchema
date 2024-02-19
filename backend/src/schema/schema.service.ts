@@ -19,9 +19,7 @@ export class SchemaService {
     try {
       return await this.schemaModel.create(createSchemaDto);
     } catch (e) {
-      unlinkSync(
-        join(config[process.env.NODE_ENV].publicPath, createSchemaDto.img),
-      );
+      unlinkSync(join(config().publicPath, createSchemaDto.img));
       throw e;
     }
   }
@@ -40,7 +38,7 @@ export class SchemaService {
   async remove(id: number) {
     const img = await this.schemaModel.findByPk(id, { attributes: ['img'] });
     if (!img) return 0;
-    unlinkSync(join(config[process.env.NODE_ENV].publicPath, img.toJSON().img));
+    unlinkSync(join(config().publicPath, img.toJSON().img));
     return await this.schemaModel.destroy({ where: { id } });
   }
 }
