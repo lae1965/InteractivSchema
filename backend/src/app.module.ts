@@ -11,15 +11,19 @@ import { WorkPlace } from './work-places/model';
 import { Employee } from './employees/model';
 import config from './config';
 
+console.log('MODE:', process.env.NODE_ENV);
+console.log('PUBLIC:', config[process.env.NODE_ENV].publicPath);
+console.log('DATABASE:', config[process.env.NODE_ENV].databaseStorage);
+
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true }),
     EmployeesModule,
     SchemaModule,
     WorkPlacesModule,
     SequelizeModule.forRoot({
       dialect: 'sqlite',
-      storage: 'database.sqlite3',
+      storage: config[process.env.NODE_ENV].databaseStorage,
       models: [Schema, WorkPlace, Employee],
       autoLoadModels: true,
     }),
