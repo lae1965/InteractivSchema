@@ -5,8 +5,8 @@ const development = {
   databaseStorage: join(process.cwd(), 'database.sqlite3'),
 };
 const production = {
-  publicPath: join(process.cwd(), '..', 'public'),
-  databaseStorage: join(process.cwd(), '..', 'database.sqlite3'),
+  publicPath: join(process.cwd(), 'public'),
+  databaseStorage: join(process.cwd(), 'database.sqlite3'),
 };
 
 const config = () =>
