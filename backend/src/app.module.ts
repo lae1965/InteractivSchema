@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ServeStaticModule } from '@nestjs/serve-static';
-
+import { ConfigModule } from '@nestjs/config';
 import { EmployeesModule } from './employees/employees.module';
 
 import { SchemaModule } from './schema/schema.module';
@@ -13,6 +13,7 @@ import config from './config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     EmployeesModule,
     SchemaModule,
     WorkPlacesModule,
